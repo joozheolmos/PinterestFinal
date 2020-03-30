@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+        <div class="bajada  py-4">
+            <h2 class="text-uppercase font-weight-bold">Pins</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="card-columns">
+              <% @pins.each do |pin| %>
+              <div class="card">
+                    <div class="card-body">
+                      <%= image_tag pin.images[0].variant(resize: '300x300^', extent: '300x300', gravity: 'Center'), class: "card-img-top" %>
+                      <h5 class="card-title text-light text-uppercase font-weight-bold"><%= pin.name %></h5>
+                      <p class="text-light text-uppercase font-weight-bold">Publicado por: <%= pin.user.name %></p>
+                      <p class="card-text text-light"><%= pin.description %></p>
+                      <%= link_to 'Ver Más', pin, class: 'btn btn-outline-info text-info mr-2' %>
+                      <% if can? :update, pin %>
+                        <%= link_to 'Editar', edit_pin_path(pin), class: 'btn btn-outline-warning text-warning mr-2' %>
+                      <% end %>
+                      <% if can? :destroy, pin %>
+                        <%= link_to 'Destruir', pin, method: :delete, data: { confirm: 'Estas Seguro?' }, class: 'btn btn-outline-danger text-danger' %>
+                      <% end %>
+                    </div>
+              </div>
+              <% end %>
+            </div>
+        </div>
+    </div>
+  <div class="col-12 text-center mt-3">
+      <%= link_to 'Generar Pin', new_pin_path, class: 'btn btn-outline-danger text-danger' %>
+  </div>
+  </div>
+</div>
+
+

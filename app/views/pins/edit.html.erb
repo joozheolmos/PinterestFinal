@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row text-center mt-4">
+        <%= link_to 'Volver', pins_path, class: 'btn btn-outline-danger text-danger mr-2' %>
+        <%= link_to 'Ver Pin', @pin, class: 'btn btn-outline-info text-info ' %>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12">
+            <div class="bajada  py-4">
+                <h2 class="text-uppercase font-weight-bold">Editar Pin</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row text-center mt-4">
+        <% @pin.images.each do |image| %>
+            <div class="d-block">
+            <%= image_tag image.variant(resize: '150x150^', extent: '150x150', gravity: 'Center') %>
+                <%= link_to 'Remove', delete_image_pin_path(@pin, image), method: :delete, data: { confirm: 'Estas seguro?' }, class: "btn btn-danger" %>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<%= render 'form', pin: @pin %>

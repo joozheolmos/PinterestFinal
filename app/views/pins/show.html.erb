@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 ">
+    <div class="row align-items-center p-3">
+      <div class="col-6">
+      <figure class="img-pins-interior">
+        <%= image_tag @pin.images[0].variant(resize: '500x500^', extent: '500x500', gravity: 'Center') %>
+      </figure>
+      </div>
+      <div class="col-6 bg-dark text-white p-3 texto-pin-interior">
+      <h2 class="text-uppercase font-weight-bold mb-2"><%= @pin.name %></h2>
+      <% @pin.images.each do |image| %>
+        <%= image_tag image.variant(resize: '100x100^', extent: '100x100', gravity: 'Center') %>
+      <% end %>
+      <p class="mt-2"><%= @pin.description %></p>
+      <% if can? :update, @pin %>
+        <p><%= link_to 'Editar', edit_pin_path(@pin), class: 'btn btn-outline-warning text-warning mr-2' %></p>
+      <% end %>
+      <%= link_to 'Volver', pins_path, class: 'btn btn-outline-info text-info mr-2' %>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
